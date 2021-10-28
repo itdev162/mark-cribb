@@ -12,6 +12,10 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using Application.Posts;
+
+
 
 namespace API
 {
@@ -28,6 +32,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddCors(opt =>
             {
                 opt.AddPolicy(CorsPolicy, policyBuilder =>

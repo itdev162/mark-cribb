@@ -1,20 +1,25 @@
 import React from 'react';
-import './App.css';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PostList from './PostList/PostList';
+import Post from './Post/Post';
+import './App.css';
+
 
 
 
 class App extends React.Component {
 
   state = {
-    values: []
+    posts: [],
+    post: null
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/values')
+    axios.get('http://localhost:5000/api/posts')
     .then((response) => {
       this.setState({
-        values: response.data
+        posts: response.data
       })
     })
     .catch((error) => {
@@ -22,15 +27,36 @@ class App extends React.Component {
     })
   }
 
+  viewPost = (post) => {
+    console.log(`view ${post.title}`);
+    this.setState({
+      post: post
+    });
+  }
+
   render() {
-      return (
+    const { posts, post } = this.state;
+
+    return(
+      <Router>
         <div className="App">
-          <header className="App-header">
+          <header className="App=header">
             BlogBox
           </header>
-            {this.state.values.map((value: any) => <div key={value}>{value}</div>)}
+          <main className="App-content">
+            <Switch>
+              <Route exact path="/">
+                <PostList posts={posts} clickPost={this.viewPost} />
+              </Route>
+              <Route path="/posts/:postId">
+                <Post post={post} />
+              </Route>
+            </Switch>
+          </main>
         </div>
-      );
+      </Router>
+    );
   }
 }
+
 export default App;

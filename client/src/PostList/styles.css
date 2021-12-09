@@ -1,0 +1,17 @@
+.postListItem {
+    padding: 10px;
+    border: solid 1px transparent;
+}
+
+.postListItem:hover {
+    background-color: #eeeeee;
+    border-color: #aaaaaa;
+    cursor: pointer;
+}
+
+.postListItem p {
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

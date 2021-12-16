@@ -15,3 +15,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.postControls {
+    margin: 10px 0 10px 0;
+}
+
+.postControls button {
+    margin-left: 10px;
+}
